@@ -9,6 +9,11 @@ import { setUser, unsetUser } from '../../actions'
 
 class App extends Component {
 
+  logOut = () => {
+    localStorage.removeItem('token')
+    this.props.unsetUser();
+  }
+
   componentDidMount(){
     console.log("App mounted")
     let token = localStorage.getItem('token');
@@ -21,11 +26,7 @@ class App extends Component {
     }
   }
 
-  logOut = () => {
-    localStorage.removeItem('token')
-    this.props.unsetUser();
-    this.props.history.push('/login')
-  }
+
 
   render(){
     return (

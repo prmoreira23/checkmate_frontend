@@ -6,9 +6,18 @@ import Welcome from '../ui/Welcome'
 import Signin from '../ui/Signin'
 import Signup from '../ui/Signup'
 import { connect } from 'react-redux'
+import { unsetUser } from '../../actions'
+
 
 
 const Container = (props) => {
+
+  const logOut = () => {
+    localStorage.removeItem('token')
+    props.unsetUser();
+    props.history.push('/signin')
+  }
+
   return (
     <Fragment>
       <noscript>
@@ -23,12 +32,23 @@ const Container = (props) => {
           <Route path='/schedule' render={() => props.auth.token ? <Schedule /> : <Redirect to="/signin" />} />
           <Route path='/signin' render={() => props.auth.token ? <Redirect to="/" /> : <Signin />} />
           <Route path='/signup' render={() => props.auth.token ? <Redirect to="/" /> : <Signup />} />
+          <Route path='/signout' render={() => {
+            if(props.auth.token){
+              logOut();
+              props.unsetUser()
+            }
+            return <Redirect to="/" />
+            }
+          }
+          />
           <Route path='*' component={(props) => <h1>404</h1>} />
         </Switch>
       </div>
     </Fragment>
   )
 }
+
+
 
 
 const mapStateToProps = (state) => {
@@ -38,5 +58,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-// export default withRouter(Container);
-export default withRouter(connect(mapStateToProps, null)(Container));
+const mapDispatchToProps = dispatch =>
+  ({
+    unsetUser: () => {
+      dispatch(unsetUser())
+    }
+  })
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Container));
