@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "token": null,
+    "current_user": null
+  },
+  "contracts": {
+    "incoming_contracts": [],
+    "outcoming_contracts": []
+  },
+  "current_contract": null
+}

@@ -5,6 +5,7 @@ import { Roster, Schedule } from '../ui/Home'
 import Welcome from '../ui/Welcome'
 import Signin from '../ui/Signin'
 import Signup from '../ui/Signup'
+import { connect } from 'react-redux'
 
 
 const Container = (props) => {
@@ -18,15 +19,24 @@ const Container = (props) => {
       <div className="ui main text container">
         <Switch>
           <Route exact path='/' component={Welcome}/>
-          <Route path='/roster' component={Roster}/>
-          <Route path='/schedule' component={Schedule}/>
-          <Route path='/signin' component={Signin}/>
-          <Route path='/signup' component={Signup}/>
-          <Route path='*' component={(props) => <h1>404</h1>}/>
+          <Route path='/roster' render={() => props.auth.token ? <Roster /> : <Redirect to="/signin" />}/>
+          <Route path='/schedule' render={() => props.auth.token ? <Schedule /> : <Redirect to="/signin" />} />
+          <Route path='/signin' render={() => props.auth.token ? <Redirect to="/" /> : <Signin />} />
+          <Route path='/signup' render={() => props.auth.token ? <Redirect to="/" /> : <Signup />} />
+          <Route path='*' component={(props) => <h1>404</h1>} />
         </Switch>
       </div>
     </Fragment>
   )
 }
 
-export default withRouter(Container);
+
+const mapStateToProps = (state) => {
+  console.log(state)
+    return {
+      auth: state.auth
+    }
+}
+
+// export default withRouter(Container);
+export default withRouter(connect(mapStateToProps, null)(Container));
