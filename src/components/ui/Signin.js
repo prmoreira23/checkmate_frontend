@@ -13,12 +13,7 @@ class Signin extends Component {
     }
   }
 
-  componentDidUpdate(){
-    console.log("COMPONENT DID UPDATE", this.props.auth);
-  }
-
   componentDidMount(){
-    console.log("SIGN IN MOUNTED");
 
 
 var formValidationRules =
@@ -84,13 +79,10 @@ var formValidationRules =
 
     onSubmitForm = (e) => {
       e.preventDefault();
-      // this.props.login(this.state.user);
       this.props.userLogin(this.state.user);
-      console.log("PABLO, :::::Login");
     }
 
   render(){
-    console.log("SIGNING RENDER TOKEN: ", this.props.auth.token)
 
     return (
       <Fragment>
@@ -99,7 +91,6 @@ var formValidationRules =
           <h2 className="ui teal image header">
             <div className="content">
               Log-in to your account
-              <br/>token: {this.props.auth.token ? `${this.props.auth.token}` : "NOPE"}
             </div>
           </h2>
 

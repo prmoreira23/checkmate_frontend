@@ -5,7 +5,7 @@ import Footer from '../ui/Footer'
 import Container from './Container'
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { setUser, unsetUser } from '../../actions'
+import { setUser, unsetUser, getUser } from '../../actions'
 
 class App extends Component {
 
@@ -15,18 +15,14 @@ class App extends Component {
   }
 
   componentDidMount(){
-    console.log("App mounted")
     let token = localStorage.getItem('token');
     if(token){
-      console.log("SETTING USER", this.props.auth)
       this.props.setUser({token: token});
-      console.log("SETTING FDIUSER", this.props.auth)
+      this.props.getUser({token: token});
     } else {
       this.logOut()
     }
   }
-
-
 
   render(){
     return (
@@ -52,6 +48,10 @@ const mapDispatchToProps = dispatch =>
     setUser: (token) => {
       dispatch(setUser(token))
     },
+    getUser: (token) => {
+      dispatch(getUser(token))
+    }
+    ,
     unsetUser: () => {
       dispatch(unsetUser())
     }

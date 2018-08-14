@@ -13,28 +13,10 @@ const Header = (props) => {
           CheckNSign
         </Link>
 
+        {props.auth.token && (
+          <Fragment>
         <Link className="item" to='/'>Home</Link>
-        <Link className="item" to='/roster'>Roster</Link>
-        <Link className="item" to='/schedule'>Schedule</Link>
-
-        <div className="ui simple dropdown item">
-          Dropdown <i className="dropdown icon"></i>
-          <div className="menu">
-            <a className="item" href="#">Link Item</a>
-            <a className="item" href="#">Link Item</a>
-            <div className="divider"></div>
-            <div className="header">Header Item</div>
-            <div className="item">
-              <i className="dropdown icon"></i>
-              Sub Menu
-              <div className="menu">
-                <a className="item" href="#">Link Item</a>
-                <a className="item" href="#">Link Item</a>
-              </div>
-            </div>
-            <a className="item" href="#">Link Item</a>
-          </div>
-        </div>
+        <Link className="item" to='/dashboard'>Dashboard</Link>)</Fragment>)}
 
         {!props.auth.token ? (
           <Fragment>
@@ -46,7 +28,7 @@ const Header = (props) => {
         ) : (
           <Fragment>
           <div className="item right">
-            <div className="item">HI, PABLO</div>
+            <div className="item">Welcome, {props.auth.current_user ? `${props.auth.current_user.first_name}!` : null}</div>
             <Link className="item" to='/signout'>Sign out</Link>
           </div>
           </Fragment>

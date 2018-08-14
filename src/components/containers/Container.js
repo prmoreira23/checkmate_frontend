@@ -4,9 +4,11 @@ import { BrowserRouter, Switch, withRouter } from 'react-router-dom';
 import { Roster, Schedule } from '../ui/Home'
 import Welcome from '../ui/Welcome'
 import Signin from '../ui/Signin'
+import Profile from '../ui/Profile'
 import Signup from '../ui/Signup'
 import { connect } from 'react-redux'
 import { unsetUser } from '../../actions'
+import ContractContainer from '../ui/ContractContainer'
 
 
 
@@ -27,8 +29,8 @@ const Container = (props) => {
 
       <div className="ui main text container">
         <Switch>
-          <Route exact path='/' component={Welcome}/>
-          <Route path='/roster' render={() => props.auth.token ? <Roster /> : <Redirect to="/signin" />}/>
+          <Route exact path='/' render={() => props.auth.token ? <Profile /> : <Welcome />} />
+          <Route path='/dashboard' render={() => props.auth.token ? <ContractContainer /> : <Redirect to="/signin" />}/>
           <Route path='/schedule' render={() => props.auth.token ? <Schedule /> : <Redirect to="/signin" />} />
           <Route path='/signin' render={() => props.auth.token ? <Redirect to="/" /> : <Signin />} />
           <Route path='/signup' render={() => props.auth.token ? <Redirect to="/" /> : <Signup />} />

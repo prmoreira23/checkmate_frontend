@@ -27,8 +27,8 @@ const signup = (user) => {
       'Content-Type': 'application/json'
     },
     method: "POST",
-    body: JSON.stringify({ user: user })
+    body: JSON.stringify(user)
   }).then(res => res.json())
 }
 
-export { login }
+export { login, signup, getCurrentUser }

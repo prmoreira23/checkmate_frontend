@@ -139,7 +139,7 @@ class Signup extends Component {
       <Fragment>
       <h2 className="ui teal image header">
         <div className="content">
-          Create a new account
+          Create a new contract
         </div>
       </h2>
       <form class="ui form">
