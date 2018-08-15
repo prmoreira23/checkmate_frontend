@@ -8,8 +8,8 @@ class Dashboard extends Component {
 
   onClickButton = (event) => {
     let id = event.target.dataset.id;
-    debugger
-    let contract = this.props.contracts.find(contract => contract.id === id);
+    let contracts = this.props.contracts.incoming_contracts.concat(this.props.contracts.outcoming_contracts);
+    let contract = contracts.find(cont => cont.id == id);
     this.props.setContract(contract);
   }
 
@@ -30,7 +30,7 @@ class Dashboard extends Component {
       <Fragment>
         <h2 className="ui teal image header">
           <div className="content">
-            MY DASHBOARD
+            My Dashboard
           </div>
         </h2>
 

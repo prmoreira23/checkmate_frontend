@@ -15,11 +15,10 @@ const Header = (props) => {
 
         {props.auth.token && (
           <Fragment>
-          <Link className="item" to='/'>Home</Link>
-          <Link className="item" to='/dashboard'>Dashboard</Link>)
+          <Link className="item" to='/'>My Profile</Link>
+          <Link className="item" to='/dashboard'>Dashboard</Link>
           <Link className="item" to='/contracts/new'>Create a Contract</Link>
           <Link className="item" to='/contracts/check'>Check Contract</Link>
-        )
         </Fragment>)
         }
 

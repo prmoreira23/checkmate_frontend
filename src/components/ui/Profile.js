@@ -7,7 +7,7 @@ const Welcome = (props) => {
   <Fragment>
   <h2 className="ui teal image header">
     <div className="content">
-      MY PROFILE
+      My Profile
     </div>
   </h2>
     <p><strong>Full Name:</strong> {props.current_user && props.current_user.full_name}</p>
