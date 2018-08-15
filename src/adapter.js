@@ -17,7 +17,31 @@ const getCurrentUser = (token) => {
       'Content-Type': 'application/json',
       Accepts: 'application/json',
       Authorization: token
-    }
+    },
+    method: "GET"
+  }).then(res => res.json())
+}
+
+const getInContracts = (token) => {
+  return fetch(BASE_URL+"contracts/incoming", {
+    headers: {
+      'Content-Type': 'application/json',
+      Accepts: 'application/json',
+      Authorization: token
+    },
+    method: "GET"
+  }).then(res => res.json())
+}
+
+const getOutContracts = (token) => {
+  console.log(token, "INSIDE adpter");
+  return fetch(BASE_URL+"contracts/outcoming", {
+    headers: {
+      'Content-Type': 'application/json',
+      Accepts: 'application/json',
+      Authorization: token
+    },
+    method: "GET"
   }).then(res => res.json())
 }
 
@@ -31,4 +55,4 @@ const signup = (user) => {
   }).then(res => res.json())
 }
 
-export { login, signup, getCurrentUser }
+export { login, signup, getCurrentUser, getInContracts, getOutContracts }

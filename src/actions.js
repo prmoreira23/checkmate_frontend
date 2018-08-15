@@ -1,4 +1,4 @@
-import { login, signup } from './adapter'
+import { login, signup, getInContracts, getOutContracts } from './adapter'
 const SERVER = "http://localhost:3000";
 const BASE_URL = `${SERVER}/api/v1/`;
 
@@ -33,9 +33,44 @@ export const getUser = (token) => {
       method: "GET"
     }).then(res => res.json())
     .then((user) => {
-      console.log("GETUSER", user, token);
+      console.log("GETUSER", user, token.token);
+      dispatch(getOutcomingContracts(token.token));
+      dispatch(getIncomingContracts(token.token));
       dispatch(setCurrentUser(user))
     });
+  }
+}
+
+export const getIncomingContracts = (token) => {
+  return (dispatch) => {
+    getInContracts(token)
+    .then((contracts) => {
+      dispatch(setIncomingContracts(contracts.contracts))
+    });
+  }
+}
+
+export const setIncomingContracts = (contracts) => {
+  return {
+      type: "GET_INCOMING_CONTRACTS",
+      payload: contracts
+  }
+}
+
+export const getOutcomingContracts = (token) => {
+  return (dispatch) => {
+    getOutContracts(token)
+    .then((contracts) => {
+      dispatch(setOutcomingContracts(contracts.contracts))
+    });
+  }
+}
+
+
+export const setOutcomingContracts = (contracts) => {
+  return {
+      type: "GET_OUTCOMING_CONTRACTS",
+      payload: contracts
   }
 }
 
@@ -43,6 +78,13 @@ export const setUser = (token) => {
   return {
       type: "SET_USER",
       payload: token
+  }
+}
+
+export const setCurrentContract = (contract) => {
+  return {
+      type: "SET_CURRENT_CONTRACT",
+      payload: contract
   }
 }
 

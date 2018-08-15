@@ -15,11 +15,18 @@ const Header = (props) => {
 
         {props.auth.token && (
           <Fragment>
-        <Link className="item" to='/'>Home</Link>
-        <Link className="item" to='/dashboard'>Dashboard</Link>)</Fragment>)}
+          <Link className="item" to='/'>Home</Link>
+          <Link className="item" to='/dashboard'>Dashboard</Link>)
+          <Link className="item" to='/contracts/new'>Create a Contract</Link>
+          <Link className="item" to='/contracts/check'>Check Contract</Link>
+        )
+        </Fragment>)
+        }
 
         {!props.auth.token ? (
           <Fragment>
+          <Link className="item" to='/about'>About</Link>
+          <Link className="item" to='/contracts/check'>Check Contract</Link>
           <div className="item right">
             <Link className="item" to='/signin'>Login</Link>
             <Link className="item" to='/signup'>Sign up</Link>
