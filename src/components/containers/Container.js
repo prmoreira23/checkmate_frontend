@@ -10,7 +10,7 @@ import { connect } from 'react-redux'
 import { unsetUser } from '../../actions'
 import ContractContainer from './ContractContainer'
 import NewContract from '../ui/NewContract'
-
+import About from '../ui/About'
 
 
 const Container = (props) => {
@@ -34,6 +34,7 @@ const Container = (props) => {
           <Route path='/dashboard' render={() => props.auth.token ? <ContractContainer /> : <Redirect to="/signin" />}/>
           <Route path='/contracts/new' render={() => props.auth.token ? <NewContract /> : <Redirect to="/signin" />}/>
           <Route path='/schedule' render={() => props.auth.token ? <Schedule /> : <Redirect to="/signin" />} />
+          <Route path='/about' component={About} />
           <Route path='/signin' render={() => props.auth.token ? <Redirect to="/" /> : <Signin />} />
           <Route path='/signup' render={() => props.auth.token ? <Redirect to="/" /> : <Signup />} />
           <Route path='/signout' render={() => {
