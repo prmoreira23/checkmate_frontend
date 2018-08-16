@@ -22,6 +22,25 @@ const getCurrentUser = (token) => {
   }).then(res => res.json())
 }
 
+export const getContractPdf = (id, token) => {
+  return fetch(BASE_URL+"pdf", {
+    headers: {
+      'Content-Type': 'application/json',
+      Accepts: 'application/json',
+      Authorization: token,
+      id: id
+    },
+    method: "GET"
+  }).then(response => response.blob())
+  .then(blob => {
+    let url = window.URL.createObjectURL(blob);
+    let a = document.createElement('a');
+    a.href = url;
+    a.download = "contract.pdf";
+    a.click();
+  });
+}
+
 const getInContracts = (token) => {
   return fetch(BASE_URL+"contracts/incoming", {
     headers: {
