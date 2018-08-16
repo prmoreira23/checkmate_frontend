@@ -1,4 +1,4 @@
-import { login, signup, getInContracts, getOutContracts } from './adapter'
+import { login, signup, getInContracts, getOutContracts, createContract } from './adapter'
 const SERVER = "http://localhost:3000";
 const BASE_URL = `${SERVER}/api/v1/`;
 
@@ -19,6 +19,15 @@ export const userSignup = (user) => {
     .then(result => {
       console.log("TRYING TO LOGIN", user.user.email);
       dispatch(userLogin({email: user.user.email, password: user.user.password}))
+    });
+  }
+}
+
+export const newContract = (contract, token) => {
+  return (dispatch) => {
+    createContract(contract, token)
+    .then(result => {
+      console.log("TRYING TO CREATE NEW CONTRACT", result);
     });
   }
 }

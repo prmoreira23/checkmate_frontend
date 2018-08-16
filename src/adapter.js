@@ -55,4 +55,15 @@ const signup = (user) => {
   }).then(res => res.json())
 }
 
+export const createContract = (contract, token) => {
+  return fetch(BASE_URL+"contracts", {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    method: "POST",
+    body: JSON.stringify(contract)
+  }).then(res => res.json())
+}
+
 export { login, signup, getCurrentUser, getInContracts, getOutContracts }

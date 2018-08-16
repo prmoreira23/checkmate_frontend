@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react'
-import { userSignup } from '../../actions';
+import { newContract } from '../../actions';
 import { connect } from 'react-redux'
+import { withRouter } from "react-router-dom";
 
 
 class Signup extends Component {
@@ -10,7 +11,6 @@ class Signup extends Component {
       recipient_id: "",
       title: "",
       content: "",
-      status: ""
     }
   }
 
@@ -42,7 +42,7 @@ class Signup extends Component {
 
     var formSettings =
     {
-        onSuccess: () => alert("Pablo")
+        onSuccess: this.onSubmit
     }
 
     window.$('.ui.form').form(formValidationRules, formSettings);
@@ -62,7 +62,8 @@ class Signup extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    this.props.userSignup({user: this.state.user});
+    this.props.createContract({contract: this.state.contract}, this.props.auth.token);
+    this.props.history.push("/dashboard");
   }
 
   render(){
@@ -76,16 +77,23 @@ class Signup extends Component {
       </h2>
       <form class="ui form">
 
-        <h4 class="ui dividing header">Personal information</h4>
         <div class="two fields">
           <div class="field">
             <label>Recipient id</label>
             <input type="number" name="recipient_id" placeholder="Recipient id" value={this.state.contract.recipient_id} onChange={this.onChange} />
-            </div>
           </div>
+          <div class="field">
+            <label>title</label>
+            <input type="text" name="title" placeholder="Title" value={this.state.contract.title} onChange={this.onChange} />
+          </div>
+        </div>
 
+        <div class="field">
+          <label>Content</label>
+          <textarea name="content" placeholder="Content" value={this.state.contract.content} onChange={this.onChange}></textarea>
+        </div>
 
-      <button class="ui button" type="submit">Submit</button>
+      <button className="ui button" type="submit">Submit</button>
 
       <div className="ui error message"></div>
 
@@ -107,9 +115,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch =>
   ({
-    userSignup: (user) => {
-      dispatch(userSignup(user))
+    createContract: (contract, token) => {
+      console.log("HERE: ", contract, token);
+      dispatch(newContract(contract, token))
     }
   })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Signup));
