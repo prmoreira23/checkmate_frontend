@@ -22,7 +22,7 @@ const getCurrentUser = (token) => {
   }).then(res => res.json())
 }
 
-export const getContractPdf = (id, token) => {
+export const getContractPdf = (id, token, contract) => {
   return fetch(BASE_URL+"pdf", {
     headers: {
       'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export const getContractPdf = (id, token) => {
     let url = window.URL.createObjectURL(blob);
     let a = document.createElement('a');
     a.href = url;
-    a.download = "contract.pdf";
+    a.download = `${contract}.pdf`;
     a.click();
   });
 }

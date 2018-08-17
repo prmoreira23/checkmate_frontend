@@ -119,6 +119,8 @@ class Signup extends Component {
 
   onChange = (event) => {
     event.persist();
+
+    window.$('.ui.form').form('validate form');
     this.setState((prevState) => {
       return {
         user: {...prevState.user,

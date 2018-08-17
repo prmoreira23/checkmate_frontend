@@ -6,7 +6,7 @@ import {getContractPdf} from '../../adapter'
 const Contract = (props) => {
 
   const onClickButton = (event) => {
-    getContractPdf(props.current_contract.id, props.auth.token)
+    getContractPdf(props.current_contract.id, props.auth.token, props.current_contract.title)
     .then(p => console.log("Starting download..."));
   }
 

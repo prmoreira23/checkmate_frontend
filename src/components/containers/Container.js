@@ -11,6 +11,7 @@ import { unsetUser } from '../../actions'
 import ContractContainer from './ContractContainer'
 import NewContract from '../ui/NewContract'
 import About from '../ui/About'
+import CheckContract from '../ui/CheckContract'
 
 
 const Container = (props) => {
@@ -33,6 +34,7 @@ const Container = (props) => {
           <Route exact path='/' render={() => props.auth.token ? <Profile /> : <Welcome />} />
           <Route path='/dashboard' render={() => props.auth.token ? <ContractContainer /> : <Redirect to="/signin" />}/>
           <Route path='/contracts/new' render={() => props.auth.token ? <NewContract /> : <Redirect to="/signin" />}/>
+          <Route path='/contracts/check' component={CheckContract}/>
           <Route path='/schedule' render={() => props.auth.token ? <Schedule /> : <Redirect to="/signin" />} />
           <Route path='/about' component={About} />
           <Route path='/signin' render={() => props.auth.token ? <Redirect to="/" /> : <Signin />} />

@@ -35,8 +35,9 @@ const Footer = (props) => {
             </div>
           </div>
           <div className="seven wide column">
-            <h4 className="ui inverted header">Footer Header</h4>
-            <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+            <h4 className="ui inverted header">CheckNSign</h4>
+            <p>We allow you to create, share, and sign contracts privately. And the best part of all that is that we
+             don't keep your personal information. Privacy above all.</p>
           </div>
         </div>
       <div className="ui inverted section divider"></div>
