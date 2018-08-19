@@ -7,7 +7,8 @@ import { withRouter } from "react-router-dom";
 class CheckContract extends Component {
 
   state = {
-    pdf: null
+    pdf: null,
+    current_contract: null
   }
 
   componentDidMount(){
@@ -55,35 +56,42 @@ class CheckContract extends Component {
     fetch(`http://localhost:3000/api/v1/check`, options)
       .then(resp => resp.json())
       .then(result => {
-        alert(result.sha256)
+        alert(result.sha256);
+        this.setState({
+          current_contract: result.sha256
+        })
       })
-
-    // this.props.createContract({contract: this.state.contract}, this.props.auth.token);
-    // this.props.history.push("/dashboard");
   }
 
   render(){
 
     return (
       <Fragment>
-      <h2 className="ui teal image header">
-        <div className="content">
-          Check contract authenticity
-        </div>
-      </h2>
-      <form class="ui form">
+      {!this.state.current_contract && (<Fragment>
+        <h2 className="ui teal image header">
+          <div className="content">
+            Check contract authenticity
+          </div>
+        </h2>
+        <form class="ui form">
 
-        <div class="field">
-          <label>Content</label>
-          <input type="file" accept= ".pdf" ref={(input) => { this.filesInput = input }} name="file"
-   placeholder='Upload pdf...' onChange={this.handleChange.bind(this)} />
-        </div>
+          <div class="field">
+            <label>Contract</label>
+            <input type="file" accept= ".pdf" ref={(input) => { this.filesInput = input }} name="file"
+     placeholder='Upload pdf...' onChange={this.handleChange.bind(this)} />
+          </div>
 
-      <button className="ui button" type="submit">Check</button>
+        <button className="ui button" type="submit">Check</button>
 
-      <div className="ui error message"></div>
+        <div className="ui error message"></div>
 
-      </form>
+        </form>
+      </Fragment>)}
+
+      {this.state.current_contract && (<Fragment>
+        <p>SHA256: {this.state.current_contract}</p>
+      </Fragment>)}
+
     </Fragment>
     )
   }
