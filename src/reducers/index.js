@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import AuthReducer from './AuthReducer'
+import ErrorReducer from './ErrorReducer'
 import ContractReducer from './ContractReducer'
 import data from '../initialState.json'
 
@@ -14,5 +15,6 @@ import data from '../initialState.json'
 
 export default combineReducers({
   auth: AuthReducer,
-  contracts: ContractReducer
+  contracts: ContractReducer,
+  errors: ErrorReducer
 })

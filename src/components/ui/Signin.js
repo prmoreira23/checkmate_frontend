@@ -48,7 +48,7 @@ var formValidationRules =
 
   var formSettings =
   {
-      onSuccess: this.onSubmitForm
+      onSuccess: this.onSubmitForm.bind(this)
   }
 
   window.$('.ui.form').form(formValidationRules, formSettings);
@@ -79,7 +79,7 @@ var formValidationRules =
 
     onSubmitForm = (e) => {
       e.preventDefault();
-      this.props.userLogin(this.state.user);
+      this.props.userLogin(this.state.user, '/signin');
     }
 
   render(){
@@ -132,9 +132,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch =>
   ({
-    userLogin: (credentials) => {
-      console.log("CALL USER LOGIN", credentials);
-      dispatch(userLogin(credentials))
+    userLogin: (credentials, pathname) => {
+      dispatch(userLogin(credentials, pathname))
     }
   })
 

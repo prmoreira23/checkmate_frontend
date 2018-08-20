@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, Component } from 'react'
 import { Route, Redirect } from 'react-router-dom';
 import { BrowserRouter, Switch, withRouter } from 'react-router-dom';
 import { Roster, Schedule } from '../ui/Home'
@@ -7,21 +7,27 @@ import Signin from '../ui/Signin'
 import Profile from '../ui/Profile'
 import Signup from '../ui/Signup'
 import { connect } from 'react-redux'
-import { unsetUser } from '../../actions'
+import { unsetUser, unsetError } from '../../actions'
 import ContractContainer from './ContractContainer'
 import NewContract from '../ui/NewContract'
 import About from '../ui/About'
 import CheckContract from '../ui/CheckContract'
 
 
-const Container = (props) => {
+class Container extends Component{
 
-  const logOut = () => {
+  logOut = () => {
     localStorage.removeItem('token')
-    props.unsetUser();
-    props.history.push('/signin')
+    this.props.unsetUser();
+    this.props.history.push('/signin')
   }
 
+  componentDidUpdate(){
+    console.log(this.props);
+    this.props.error.message && (this.props.location.pathname === this.props.error.pathname ? null : this.props.unsetError());
+  }
+
+  render(){
   return (
     <Fragment>
       <noscript>
@@ -30,19 +36,25 @@ const Container = (props) => {
       <div id="root"></div>
 
       <div className="ui main text container">
+        {this.props.error.message && (<Fragment>
+          <div className="ui negative message">
+            <i className="close icon" onClick={this.props.unsetError}></i>
+            {this.props.error.message}
+          </div>
+        </Fragment>)}
         <Switch>
-          <Route exact path='/' render={() => props.auth.token ? <Profile /> : <Welcome />} />
-          <Route path='/dashboard' render={() => props.auth.token ? <ContractContainer /> : <Redirect to="/signin" />}/>
-          <Route path='/contracts/new' render={() => props.auth.token ? <NewContract /> : <Redirect to="/signin" />}/>
+          <Route exact path='/' render={() => this.props.auth.token ? <Profile /> : <Welcome />} />
+          <Route path='/dashboard' render={() => this.props.auth.token ? <ContractContainer /> : <Redirect to="/signin" />}/>
+          <Route path='/contracts/new' render={() => this.props.auth.token ? <NewContract /> : <Redirect to="/signin" />}/>
           <Route path='/contracts/check' component={CheckContract}/>
-          <Route path='/schedule' render={() => props.auth.token ? <Schedule /> : <Redirect to="/signin" />} />
+          <Route path='/schedule' render={() => this.props.auth.token ? <Schedule /> : <Redirect to="/signin" />} />
           <Route path='/about' component={About} />
-          <Route path='/signin' render={() => props.auth.token ? <Redirect to="/" /> : <Signin />} />
-          <Route path='/signup' render={() => props.auth.token ? <Redirect to="/" /> : <Signup />} />
+          <Route path='/signin' render={() => this.props.auth.token ? <Redirect to="/" /> : <Signin />} />
+          <Route path='/signup' render={() => this.props.auth.token ? <Redirect to="/" /> : <Signup />} />
           <Route path='/signout' render={() => {
-            if(props.auth.token){
-              logOut();
-              props.unsetUser()
+            if(this.props.auth.token){
+              this.logOut();
+              this.props.unsetUser()
             }
             return <Redirect to="/" />
             }
@@ -53,6 +65,7 @@ const Container = (props) => {
       </div>
     </Fragment>
   )
+  }
 }
 
 
@@ -61,7 +74,8 @@ const Container = (props) => {
 const mapStateToProps = (state) => {
   console.log(state)
     return {
-      auth: state.auth
+      auth: state.auth,
+      error: state.errors
     }
 }
 
@@ -69,6 +83,9 @@ const mapDispatchToProps = dispatch =>
   ({
     unsetUser: () => {
       dispatch(unsetUser())
+    },
+    unsetError: () => {
+      dispatch(unsetError())
     }
   })
 

@@ -2,14 +2,31 @@ import { login, signup, getInContracts, getOutContracts, createContract } from '
 const SERVER = "http://localhost:3000";
 const BASE_URL = `${SERVER}/api/v1/`;
 
-export const userLogin = (credentials) => {
+export const userLogin = (credentials, pathname=null) => {
   return (dispatch) => {
     login(credentials)
     .then(result => {
-      localStorage.token = result.token;
-      dispatch(setUser(result));
-      dispatch(getUser(result));
+      if(result){
+        localStorage.token = result.token;
+        dispatch(setUser(result));
+        dispatch(getUser(result));
+      } else {
+        dispatch(setError({message: "USERNAME/PASSWORD WRONG", pathname: pathname}));
+      }
     });
+  }
+}
+
+export const setError = (error) => {
+  return {
+      type: "SET_ERROR",
+      payload: {message: error.message, pathname: error.pathname}
+  }
+}
+
+export const unsetError = () => {
+  return {
+      type: "UNSET_ERROR"
   }
 }
 
