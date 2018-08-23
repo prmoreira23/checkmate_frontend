@@ -23,7 +23,6 @@ class Container extends Component{
   }
 
   componentDidUpdate(){
-    console.log(this.props);
     this.props.error.message && (this.props.location.pathname === this.props.error.pathname ? null : this.props.unsetError());
   }
 

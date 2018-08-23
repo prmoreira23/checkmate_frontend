@@ -24,6 +24,13 @@ export const setError = (error) => {
   }
 }
 
+export const changeContract = (contract) => {
+  return {
+      type: "CHANGE_CONTRACT",
+      payload: contract
+  }
+}
+
 export const unsetError = () => {
   return {
       type: "UNSET_ERROR"

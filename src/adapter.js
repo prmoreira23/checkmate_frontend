@@ -22,6 +22,18 @@ const getCurrentUser = (token) => {
   }).then(res => res.json())
 }
 
+export const signContract = (token, contract_id) => {
+  return fetch(BASE_URL+"sign_contract", {
+    headers: {
+      'Content-Type': 'application/json',
+      Accepts: 'application/json',
+      Authorization: token,
+      id: contract_id
+    },
+    method: "POST"
+  }).then(res => res.json())
+}
+
 export const getContractPdf = (id, token, contract) => {
   return fetch(BASE_URL+"pdf", {
     headers: {

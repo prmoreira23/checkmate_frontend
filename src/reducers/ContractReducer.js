@@ -17,6 +17,13 @@ export const ContractReducer = (state = {incoming_contracts: [], outcoming_contr
         ...state,
           current_contract: action.payload
       }
+    case "CHANGE_CONTRACT":
+      return {
+        ...state,
+          current_contract: {...action.payload},
+          outcoming_contracts: state.outcoming_contracts.map(contract => contract.id == action.payload.id ? action.payload : contract),
+          incoming_contracts: state.incoming_contracts.map(contract => contract.id == action.payload.id ? action.payload : contract)
+      }
     default:
       return state
   }
