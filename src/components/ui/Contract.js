@@ -26,6 +26,10 @@ const Contract = (props) => {
       <p><strong>Content:</strong> {props.current_contract.content}</p>
 
      {props.current_contract.status === "CONTRACT SUCCESFULLY BINDED" && (<div className="ui medium ok teal submit button" onClick={onClickButton}>Download</div>)}
+     {(props.current_contract.status === "REQUIRES USER'S SIGNATURE" && props.auth.current_user.id === props.current_contract.user.id) && (<div className="ui medium ok teal submit button" onClick={()=> alert("Signing Contract")}>Sign Contract</div>)}
+     {(props.current_contract.status === "REQUIRES USER'S SIGNATURE" && props.auth.current_user.id !== props.current_contract.user.id) && (<p class="ui red header">Waiting for other party to sign contract</p>)}
+     {(props.current_contract.status === "REQUIRES RECIPIENT'S SIGNATURE" && props.auth.current_user.id === props.current_contract.recipient.id) && (<div className="ui medium ok teal submit button" onClick={()=> alert("Signing Contract")}>Sign Contract</div>)}
+     {props.current_contract.status === "REQUIRES BOTH PARTIES' SIGNATURES" && (<div className="ui medium ok teal submit button" onClick={()=> alert("Signing Contract")}>Sign Contract</div>)}
     </Fragment>
   ) : (
     <p>No Contract set up</p>

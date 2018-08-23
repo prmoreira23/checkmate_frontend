@@ -53,7 +53,7 @@ class Dashboard extends Component {
             </table>
           )
            :
-           <div>NO, CONTRACTS</div>
+           <div>NO CONTRACTS</div>
          }
 
         <h2>Outcoming Contracts</h2>
@@ -76,7 +76,7 @@ class Dashboard extends Component {
             </table>
           )
            :
-           <div>NO, CONTRACTS</div>
+           <div>NO CONTRACTS</div>
          }
 
 
