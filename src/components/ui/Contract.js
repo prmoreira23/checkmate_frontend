@@ -25,7 +25,7 @@ const Contract = (props) => {
       <p><strong>Recipient:</strong> {props.current_contract.recipient.full_name}</p>
       <p><strong>Content:</strong> {props.current_contract.content}</p>
 
-     <div className="ui medium ok teal submit button" onClick={onClickButton}>Download</div>
+     {props.current_contract.status === "CONTRACT SUCCESFULLY BINDED" && (<div className="ui medium ok teal submit button" onClick={onClickButton}>Download</div>)}
     </Fragment>
   ) : (
     <p>No Contract set up</p>
