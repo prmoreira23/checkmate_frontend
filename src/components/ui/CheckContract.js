@@ -8,7 +8,8 @@ class CheckContract extends Component {
 
   state = {
     pdf: null,
-    current_contract: null
+    contract: {},
+    results: false
   }
 
   componentDidMount(){
@@ -56,10 +57,12 @@ class CheckContract extends Component {
     fetch(`http://localhost:3000/api/v1/check`, options)
       .then(resp => resp.json())
       .then(result => {
-        alert(result.sha256);
-        this.setState({
-          current_contract: result.sha256
-        })
+        if(result){
+          this.setState({
+            ...result,
+            results: true
+          })
+        }
       })
   }
 
@@ -67,7 +70,7 @@ class CheckContract extends Component {
 
     return (
       <Fragment>
-      {!this.state.current_contract && (<Fragment>
+      {(!this.state.contract.title && ! this.state.results) && (<Fragment>
         <h2 className="ui teal image header">
           <div className="content">
             Check contract authenticity
@@ -88,9 +91,23 @@ class CheckContract extends Component {
         </form>
       </Fragment>)}
 
-      {this.state.current_contract && (<Fragment>
-        <p>SHA256: {this.state.current_contract}</p>
+      {(!!this.state.contract.title && this.state.results) && (<Fragment>
+        <h2 className="ui teal image header">
+          <div className="content">
+            Contract Found in our Database
+          </div>
+        </h2>
+        <p><strong>Title:</strong> {this.state.contract.title}</p>
+        <p><strong>User's name:</strong> {this.state.contract.user.full_name}</p>
+        <p><strong>Recipient's name:</strong> {this.state.contract.recipient.full_name}</p>
+        <p><strong>token:</strong> {this.state.contract.contract_hash}</p>
       </Fragment>)}
+
+      {(!this.state.contract.title && this.state.results) && (<Fragment>
+        <p>Contract NOT found</p>
+        <p><strong>File hash:</strong> {this.state.contract.contract_hash}</p>
+      </Fragment>)}
+
 
     </Fragment>
     )
