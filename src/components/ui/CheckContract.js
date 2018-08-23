@@ -92,9 +92,9 @@ class CheckContract extends Component {
       </Fragment>)}
 
       {(!!this.state.contract.title && this.state.results) && (<Fragment>
-        <h2 className="ui teal image header">
+        <h2 className="ui green image header">
           <div className="content">
-            Contract Found in our Database
+            Contract Was Found in our Database
           </div>
         </h2>
         <p><strong>Title:</strong> {this.state.contract.title}</p>
@@ -104,7 +104,11 @@ class CheckContract extends Component {
       </Fragment>)}
 
       {(!this.state.contract.title && this.state.results) && (<Fragment>
-        <p>Contract NOT found</p>
+        <h2 className="ui red image header">
+          <div className="content">
+            Contract Was NOT Found in our Database
+          </div>
+        </h2>
         <p><strong>File hash:</strong> {this.state.contract.contract_hash}</p>
       </Fragment>)}
 

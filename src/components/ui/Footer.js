@@ -8,30 +8,27 @@ const Footer = (props) => {
       <div className="ui center aligned container">
         <div className="ui stackable inverted divided grid">
           <div className="three wide column">
-            <h4 className="ui inverted header">Group 1</h4>
+            <h4 className="ui inverted header">Our Company</h4>
             <div className="ui inverted link list">
-              <a href="#" className="item">Link One</a>
-              <a href="#" className="item">Link Two</a>
-              <a href="#" className="item">Link Three</a>
-              <a href="#" className="item">Link Four</a>
+              <a href="#" className="item">About us</a>
+              <a href="#" className="item">Technology</a>
+              <a href="#" className="item">Jobs</a>
             </div>
           </div>
           <div className="three wide column">
-            <h4 className="ui inverted header">Group 2</h4>
+            <h4 className="ui inverted header">Services</h4>
             <div className="ui inverted link list">
-              <a href="#" className="item">Link One</a>
-              <a href="#" className="item">Link Two</a>
-              <a href="#" className="item">Link Three</a>
-              <a href="#" className="item">Link Four</a>
+              <a href="#" className="item">Private Contracts</a>
+              <a href="#" className="item">Disposal of Sensitive Information</a>
+              <a href="#" className="item">Learn more</a>
             </div>
           </div>
           <div className="three wide column">
-            <h4 className="ui inverted header">Group 3</h4>
+            <h4 className="ui inverted header">Products</h4>
             <div className="ui inverted link list">
-              <a href="#" className="item">Link One</a>
-              <a href="#" className="item">Link Two</a>
-              <a href="#" className="item">Link Three</a>
-              <a href="#" className="item">Link Four</a>
+              <a href="#" className="item">For Individuals</a>
+              <a href="#" className="item">For Companies</a>
+              <a href="#" className="item">Overview</a>
             </div>
           </div>
           <div className="seven wide column">
