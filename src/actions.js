@@ -1,5 +1,5 @@
 import { login, signup, getInContracts, getOutContracts, createContract } from './adapter'
-const SERVER = "http://localhost:3000";
+const SERVER = "https://floating-shelf-30008.herokuapp.com";
 const BASE_URL = `${SERVER}/api/v1/`;
 
 export const userLogin = (credentials, pathname=null) => {
