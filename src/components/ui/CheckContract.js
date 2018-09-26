@@ -54,7 +54,7 @@ class CheckContract extends Component {
       body: formData
     }
 
-    fetch(`https://floating-shelf-30008.herokuapp.com/api/v1/check`, options)
+    fetch(`http://localhost:3000/api/v1/check`, options)
       .then(resp => resp.json())
       .then(result => {
         if(result){
